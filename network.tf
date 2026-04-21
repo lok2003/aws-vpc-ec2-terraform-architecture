@@ -33,20 +33,22 @@ resource "aws_route" "igwaccess" {
 }
 
 resource "aws_subnet" "public" {
-  vpc_id            = aws_vpc.ec2vpc.id
-  count             = length(var.public_subnet)
-  availability_zone = var.public_subnet[count.index].availability_zone
-  cidr_block        = var.public_subnet[count.index].cidr_block
+  vpc_id                  = aws_vpc.ec2vpc.id
+  count                   = length(var.public_subnet)
+  availability_zone       = var.public_subnet[count.index].availability_zone
+  cidr_block              = var.public_subnet[count.index].cidr_block
+  map_public_ip_on_launch = var.public_subnet[count.index].map_public_ip_on_launch
   tags = {
     Name = format("%s-%s", local.ec_name, var.public_subnet[count.index].name)
   }
 }
 
 resource "aws_subnet" "private" {
-  vpc_id            = aws_vpc.ec2vpc.id
-  count             = length(var.private_subnet)
-  availability_zone = var.private_subnet[count.index].availability_zone
-  cidr_block        = var.private_subnet[count.index].cidr_block
+  vpc_id                  = aws_vpc.ec2vpc.id
+  count                   = length(var.private_subnet)
+  availability_zone       = var.private_subnet[count.index].availability_zone
+  cidr_block              = var.private_subnet[count.index].cidr_block
+  map_public_ip_on_launch = var.private_subnet[count.index].map_public_ip_on_launch
   tags = {
     Name = format("%s-%s", local.ec_name, var.private_subnet[count.index].name)
   }
