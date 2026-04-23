@@ -90,3 +90,6 @@ resource "aws_vpc_security_group_egress_rule" "web" {
   security_group_id = aws_security_group.web.id
 }
 
+data "aws_vpc" "default" {
+  default = true
+}

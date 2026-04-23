@@ -13,3 +13,8 @@ output "private_subnet" {
 output "web_server_ip" {
   value = aws_instance.web.public_ip
 }
+
+output "web_server_ssh" {
+  value = format("ssh %s@%s", var.web_server_info.username, aws_instance.web.public_ip)
+  #value = "ssh ${var.web_server_info.username}@${aws_instance.web.public_ip}"
+}

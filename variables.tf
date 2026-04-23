@@ -54,5 +54,6 @@ variable "web_server_info" {
   type = object({
     instance_type = string
     ami_id        = string
+    username      = optional(string, "ubuntu")
   })
 }
